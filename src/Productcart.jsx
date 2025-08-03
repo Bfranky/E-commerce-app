@@ -5,7 +5,7 @@ import { useCart } from './CartContext';
 
 export default function ProductCard({ product }) {
   if (!product) {
-    return null; // or a placeholder skeleton
+    return null; 
   }
 
   const { add } = useCart();

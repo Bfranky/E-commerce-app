@@ -161,36 +161,3 @@ function ProductCardFallback({ product }) {
     </div>
   );
 }
-
-// import React, { useEffect, useState } from 'react';
-// import { useParams } from 'react-router-dom';
-
-// function ProductDetail({ addToCart }) {
-//   const { id } = useParams();
-//   const [product, setProduct] = useState(null);
-
-//   useEffect(() => {
-//     fetch(`http://localhost:5010/products/${id}`)
-//       .then((res) => res.json())
-//       .then((data) => setProduct(data));
-//   }, [id]);
-
-//   if (!product) return <div>Loading...</div>;
-
-//   return (
-//     <div className="p-4 border rounded">
-//       <h2 className="text-2xl font-bold mb-2">{product.name}</h2>
-//       <img src={product.image} alt={product.name} className="w-full h-48 rounded-xl overflow-hidden mb-4" />
-//       <p className="my-2 text-lg">₦{product.price}</p>
-//       <p>{product.description}</p>
-//       <button
-//         onClick={() => addToCart(product)}
-//         className="mt-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
-//       >
-//         Add to Cart
-//       </button>
-//     </div>
-//   );
-// }
-
-// export default ProductDetail;

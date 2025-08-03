@@ -22,9 +22,9 @@ export default function Header() {
       <div className="flex items-center gap-2">
         <div className="font-bold text-xl cursor-pointer" onClick={() => navigate('/products')}>
            <img
-            src="src/assets/logo.png"             // adjust path to your logo file
+            src="src/assets/logo.png"             
             alt="Store Logo"
-            className="h-10 w-auto object-contain" // size as needed
+            className="h-10 w-auto object-contain" 
             loading="lazy"
           />
         </div>
@@ -56,31 +56,3 @@ export default function Header() {
     </div>
   );
 }
-
-// import { Link } from "react-router-dom";
-
-// function Navbar({ cart }) {
-//   const totalItems = cart.reduce((acc, item) => acc + (item.quantity || 1), 0);
-
-//   return (
-//     <nav className="flex items-center justify-between p-4 bg-blue-600 text-white shadow-md">
-//       <Link to="/" className="text-xl font-bold">
-//         MyShop
-//       </Link>
-
-//       <div className="flex gap-4 items-center">
-//         <Link to="/" className="hover:underline">
-//           Home
-//         </Link>
-//         <Link to="/cart" className="relative hover:underline">
-//           Cart
-//           <span className="ml-1 bg-red-500 text-white px-2 py-0.5 rounded-full text-xs">
-//             {totalItems}
-//           </span>
-//         </Link>
-//       </div>
-//     </nav>
-//   );
-// }
-
-// export default Navbar;

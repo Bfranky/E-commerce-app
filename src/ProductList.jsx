@@ -1,11 +1,11 @@
-// src/routes/ProductList.jsx
+// src/ProductList.jsx
 import React, { useEffect, useState } from 'react';
 import { useSearchParams, useNavigate, Link } from 'react-router-dom';
 import { fetchProducts } from './utils/api'; // adjust if your api.js is elsewhere
 import ProductCard from './Productcart';
 
 
-// Simple FilterSidebar inline (you can extract to its own file if preferred)
+
 function FilterSidebar({ filters, setFilters, onApply, onClear, categories }) {
   const update = partial => setFilters(prev => ({ ...prev, ...partial }));
 
