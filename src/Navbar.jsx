@@ -22,7 +22,7 @@ export default function Header() {
       <div className="flex items-center gap-2">
         <div className="font-bold text-xl cursor-pointer" onClick={() => navigate('/products')}>
            <img
-            src="src/assets/logo.png"             
+            src=" src/assets/logo.png"            
             alt="Store Logo"
             className="h-10 w-auto object-contain" 
             loading="lazy"

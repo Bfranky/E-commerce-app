@@ -1,9 +1,8 @@
 // src/ProductList.jsx
 import React, { useEffect, useState } from 'react';
 import { useSearchParams, useNavigate, Link } from 'react-router-dom';
-import { fetchProducts } from './utils/api'; // adjust if your api.js is elsewhere
+import { fetchProducts } from './utils/api'; 
 import ProductCard from './Productcart';
-
 
 
 function FilterSidebar({ filters, setFilters, onApply, onClear, categories }) {
