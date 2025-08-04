@@ -68,12 +68,12 @@ function FilterSidebar({ filters, setFilters, onApply, onClear, categories }) {
 // Simple Pagination component
 function Pagination({ current, totalPages, onPageChange }) {
   const pages = [];
-  for (let i = 1; i <= totalPages; i++) pages.push(i);
+  for (let i = 0; i <= totalPages; i++) pages.push(i);
 
   return (
     <div className="flex items-center gap-2 justify-center mt-8 flex-wrap">
       <button
-        disabled={current === 1}
+        disabled={current === 0}
         onClick={() => onPageChange(current - 1)}
         className="px-3 py-1 border rounded"
       >
@@ -255,100 +255,4 @@ export default function ProductListPage() {
     </div>
   );
 }
-
-
-// import React, { useEffect, useState } from "react";
-// import ProductCart from "./Productcart";
-// import Filters from "./Filter";
-
-// function ProductList({ addToCart }) {
-//   const [products, setProducts] = useState([]);
-//   const [filtered, setFiltered] = useState([]);
-//   const [search, setSearch] = useState("");
-//   const [filters, setFilters] = useState({
-//     category: "",
-//     price: "",
-//     available: false,
-//   });
-
-//   // Fetch products
-//   useEffect(() => {
-//     fetch("http://localhost:5010/products")
-//       .then((res) => res.json())
-//       .then((data) => {
-//         setProducts(data);
-//         setFiltered(data);
-//       });
-//   }, []);
-
-//   // Handle filtering
-//   useEffect(() => {
-//     let result = [...products];
-
-//     if (filters.category) {
-//       result = result.filter((p) =>
-//         p.category?.toLowerCase().includes(filters.category.toLowerCase())
-//       );
-//     }
-
-//     if (filters.price) {
-//       result = result.filter((p) => p.price <= Number(filters.price));
-//     }
-
-//     if (filters.available) {
-//       result = result.filter((p) => p.available === true);
-//     }
-
-//     if (search) {
-//       result = result.filter((p) =>
-//         p.name?.toLowerCase().includes(search.toLowerCase())
-//       );
-//     }
-
-//     setFiltered(result);
-//   }, [filters, search, products]);
-
-//   const handleChange = (e) => {
-//     const { name, value, type, checked } = e.target;
-//     setFilters((prev) => ({
-//       ...prev,
-//       [name]: type === "checkbox" ? checked : value,
-//     }));
-//   };
-
-//   return (
-//     <div className="bg-white rounded-2xl shadow-md p-4 flex flex-col hover:shadow-lg transition duration-300">
-//       <div className="w-full md:w-1/4 space-y-6">
-//         <div className="w-full h-48 rounded-xl overflow-hidden mb-4">
-//           <label className="block font-semibold mb-2">Search</label>
-//           <input
-//             type="text"
-//             placeholder="Search products..."
-//             className="w-full p-2 border rounded"
-//             value={search}
-//             onChange={(e) => setSearch(e.target.value)}
-//           />
-//         </div>
-//         <Filters filters={filters} handleChange={handleChange} />
-//       </div>
-
-//       <div className="w-full md:w-3/4">
-//         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-//           {filtered.map((product) => (
-//             <ProductCart key={product.id} product={product} addToCart={addToCart} />
-//           ))}
-//         </div>
-//         <div className="flex justify-center items-center space-x-4 mt-6">
-//           <button className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300">Previous</button>
-//           <button className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">1</button>
-//           <button className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300">2</button>
-//           <button className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300">Next</button>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default ProductList;
-
 

@@ -1,17 +1,20 @@
-
-import { useCart } from './CartContext';
+import { useNavigate } from "react-router-dom";
+import { useCart } from "./CartContext";
 
 export default function CartPage() {
   const { cart, remove, add, clear } = useCart();
-  const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity) / 100, 0);
-
+  const subtotal = cart.reduce(
+    (sum, item) => sum + (item.price * item.quantity) / 100,
+    0
+  );
+  const navigate = useNavigate();
   return (
     <div className="max-w-7xl mx-auto px-6 py-12">
       <h1 className="text-4xl font-bold mb-8">Shopping Cart</h1>
       <div className="flex flex-col lg:flex-row gap-10">
         <div className="flex-1 space-y-6">
           {cart.length === 0 && <div>Your cart is empty.</div>}
-          {cart.map(item => (
+          {cart.map((item) => (
             <div
               key={item.id}
               className="flex items-center gap-6 border rounded-lg p-4 bg-white"
@@ -24,7 +27,9 @@ export default function CartPage() {
               />
               <div className="flex-1">
                 <div className="font-semibold text-lg">{item.name}</div>
-                <div className="text-gray-600">${(item.price / 100).toFixed(2)}</div>
+                <div className="text-gray-600">
+                  ${(item.price / 100).toFixed(2)}
+                </div>
               </div>
               <div className="flex items-center gap-2">
                 <button
@@ -76,7 +81,10 @@ export default function CartPage() {
             <button className="w-full py-3 bg-green-800 text-white font-semibold rounded mb-2">
               Proceed to Checkout
             </button>
-            <button className="w-full py-2 text-center text-sm text-green-800 underline">
+            <button
+              onClick={() => navigate("/products")}
+              className="w-full py-2 text-center text-sm text-green-800 underline"
+            >
               Continue Shopping
             </button>
           </div>

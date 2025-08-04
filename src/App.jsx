@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { CartProvider } from './CartContext';
 import Header from './Navbar';
 import ProductDetailPage from './Productdetails';
+import PaymentPage from './PaymentPage';
 
 const ProductListPage = lazy(() => import('./ProductList'));
 const CartPage = lazy(() => import('./Carts'));
@@ -18,6 +19,7 @@ function App() {
             <Route path="/products" element={<ProductListPage />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/products/:id" element={<ProductDetailPage/>} />
+            <Route path="/checkout" element={<PaymentPage />} />
           </Routes>
         </Suspense>
       </BrowserRouter>
