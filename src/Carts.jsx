@@ -78,7 +78,10 @@ export default function CartPage() {
                 ${subtotal.toFixed(2)}
               </div>
             </div>
-            <button className="w-full py-3 bg-green-800 text-white font-semibold rounded mb-2">
+            <button
+              onClick={() => navigate("/checkout")}
+              className="w-full py-3 bg-green-800 text-white font-semibold rounded mb-2"
+            >
               Proceed to Checkout
             </button>
             <button

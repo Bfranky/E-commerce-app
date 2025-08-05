@@ -1,12 +1,13 @@
-import React, { Suspense, lazy } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { CartProvider } from './CartContext';
-import Header from './Navbar';
-import ProductDetailPage from './Productdetails';
-import PaymentPage from './PaymentPage';
+import React, { Suspense, lazy } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { CartProvider } from "./CartContext";
+import Header from "./Navbar";
+import PaymentPage from "./PaymentPage";
+import ProductDetailPage from "./Productdetails";
+import PaymentSuccess from './SuccessPage';
 
-const ProductListPage = lazy(() => import('./ProductList'));
-const CartPage = lazy(() => import('./Carts'));
+const ProductListPage = lazy(() => import("./ProductList"));
+const CartPage = lazy(() => import("./Carts"));
 
 function App() {
   return (
@@ -18,8 +19,9 @@ function App() {
             <Route path="/" element={<Navigate to="/products" replace />} />
             <Route path="/products" element={<ProductListPage />} />
             <Route path="/cart" element={<CartPage />} />
-            <Route path="/products/:id" element={<ProductDetailPage/>} />
-            <Route path="/checkout" element={<PaymentPage />} />
+            <Route path="/checkout" element={<PaymentPage />} />{" "}
+            <Route path="/products/:id" element={<ProductDetailPage />} />
+            <Route path="/payment-success" element={<PaymentSuccess />} />
           </Routes>
         </Suspense>
       </BrowserRouter>
@@ -28,4 +30,3 @@ function App() {
 }
 
 export default App;
-
