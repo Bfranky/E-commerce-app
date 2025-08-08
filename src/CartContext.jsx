@@ -1,20 +1,18 @@
-// src/context/CartContext.jsx
+// src/CartContext.jsx
 
 import { createContext, useContext, useReducer } from 'react';
 
-// Named export so it can be imported as { CartContext }
 export const CartContext = createContext();
 
 const initialState = {
   cartItems: [],
+  purchaseHistory: JSON.parse(localStorage.getItem('purchaseHistory')) || [],
 };
 
-// Reducer function for managing cart state
 function reducer(state, action) {
   switch (action.type) {
     case 'ADD_TO_CART': {
       const exists = state.cartItems.find(item => item.id === action.payload.id);
-
       if (exists) {
         return {
           ...state,
@@ -54,36 +52,54 @@ function reducer(state, action) {
         cartItems: [],
       };
 
+    case 'CHECKOUT': {
+      const newHistory = [...state.purchaseHistory, ...state.cartItems];
+      localStorage.setItem('purchaseHistory', JSON.stringify(newHistory));
+      return {
+        ...state,
+        purchaseHistory: newHistory,
+        cartItems: [],
+      };
+    }
+
+    case 'SAVE_PURCHASE': {
+      const updatedHistory = [...state.purchaseHistory, ...action.payload];
+      localStorage.setItem('purchaseHistory', JSON.stringify(updatedHistory));
+      return {
+        ...state,
+        purchaseHistory: updatedHistory,
+      };
+    }
+
     default:
       return state;
   }
 }
 
-// Provider component
 export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  // Action methods
-  const addToCart = product =>
-    dispatch({ type: 'ADD_TO_CART', payload: product });
-
-  const removeFromCart = id =>
-    dispatch({ type: 'REMOVE_FROM_CART', payload: id });
-
+  const addToCart = product => dispatch({ type: 'ADD_TO_CART', payload: product });
+  const removeFromCart = id => dispatch({ type: 'REMOVE_FROM_CART', payload: id });
   const updateQuantity = (id, quantity) =>
     dispatch({ type: 'UPDATE_QUANTITY', payload: { id, quantity } });
+  const clearCart = () => dispatch({ type: 'CLEAR_CART' });
+  const checkout = () => dispatch({ type: 'CHECKOUT' });
 
-  const clearCart = () =>
-    dispatch({ type: 'CLEAR_CART' });
+  // ✅ New helper for ReceiptPage
+  const savePurchase = (items) => dispatch({ type: 'SAVE_PURCHASE', payload: items });
 
   return (
     <CartContext.Provider
       value={{
         cartItems: state.cartItems,
+        purchaseHistory: state.purchaseHistory,
         addToCart,
         removeFromCart,
         updateQuantity,
         clearCart,
+        checkout,
+        savePurchase, // ✅ Make it available
       }}
     >
       {children}
@@ -91,5 +107,4 @@ export const CartProvider = ({ children }) => {
   );
 };
 
-// Custom hook for accessing cart context
 export const useCart = () => useContext(CartContext);
